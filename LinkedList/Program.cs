@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static LinkedList.LinkedList;
+using static LinkedList.StackArray;
+using static LinkedList.QueueArray;
 
 namespace LinkedList
 {
@@ -11,8 +13,8 @@ namespace LinkedList
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine( "Linked List example" + "\n");
             LinkedList List = new LinkedList();
-            Console.WriteLine(List.IsEmpty());
             List.AddFirst(45);
             List.AddFirst(22);
             List.AddFirst(34);
@@ -21,14 +23,12 @@ namespace LinkedList
             List.AddFirst(58);
             List.AddFirst(22);
             List.AddLast(64);
-
-            Console.WriteLine(List.IsEmpty()+"\n"); 
             List.Show();
-                
+
             Console.WriteLine("\n");
             List.RemoveItem(22);
             List.Show();
-         
+
             Console.WriteLine("\n");
             List.Insert(22, 4);
             List.Insert(22, 1);
@@ -37,6 +37,22 @@ namespace LinkedList
             Console.WriteLine("\n");
             List.Reverce();
             List.Show();
+
+            Console.WriteLine("\n"+"Stack Array example"+"\n");
+            StackArray st = new StackArray();
+            st.Push(5);
+            st.Push(54);
+            st.Push(111);
+            st.Push(2);
+            st.Push(8);
+            st.Push(3);
+            st.Show();
+            Console.WriteLine("\n");
+            st.Pop();
+            st.Show();
+            Console.WriteLine("\n");
+            st.Reverce();
+            st.Show();
 
 
             Console.Read();
