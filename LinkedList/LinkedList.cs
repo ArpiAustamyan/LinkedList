@@ -9,27 +9,26 @@ namespace LinkedList
 {
     public class LinkedList
     {
-        private Node Head;
-        private Node Tail;
-        private int Count;
-        public LinkedList()
-        {
-            Count = 0;
-        }
+        private Node head;
+        private Node tail;
+        private int count=0;
+
+        public int Count { get => count; private set => count = value; }
+
+        public LinkedList() { }
 
         public void AddFirst(int value)
-        {
+        {         
             Node newNode = new Node(value);
             if (Count == 0)
             {
-                Tail = newNode;
-                Head = newNode;
+                tail = newNode;
             }
             else
             {
-                newNode.next = Head;
-                Head = newNode;
+                newNode.next = head;
             }
+            head = newNode;
             Count++;
         }
         public void AddLast(int value)
@@ -37,21 +36,21 @@ namespace LinkedList
             Node newNode = new Node(value);
             if (Count == 0)
             {
-                Head = newNode;
-                Tail = newNode;
+                head = newNode;
+                tail = newNode;
             }
             else
             {
-                Tail.next = newNode;
-                Tail = Tail.next;
+                tail.next = newNode;
+                tail = tail.next;
             }
             
             Count++;
         }
         public void Insert(int value,int index)
         {
-            Node previousNode = Head;
-            Node curNode = Head.next;
+            Node previousNode = head;
+            Node curNode = head.next;
 
             if (index == 1)
             {
@@ -72,39 +71,51 @@ namespace LinkedList
                 Count++;
             }
         }
-
         public void Reverce()
         {
-            int [] reverceArr = new int[Count];
-            Node curNode = Head;
-            int i = 0;
-            while(curNode != null)
+            int curCount = Count;
+            Node prevNode = head;
+            Node curNode = head.next;
+            Node nextNode = curNode.next;
+            prevNode.next = null;
+            tail = prevNode;
+            while (curCount != 2)
             {
-                reverceArr[i] = curNode.value;
-                curNode = curNode.next;
-                i++;
+                curNode.next = prevNode;
+                prevNode = curNode;
+                curNode = nextNode;
+                nextNode = nextNode.next;
+                curCount--;
             }
-            Array.Reverse((Array)reverceArr);
-            curNode = Head;
-            i = 0;
-            while (curNode != null)
-            {
-                curNode.value=reverceArr[i] ;
-                curNode = curNode.next;
-                i++;
-            }
-
+            curNode.next = prevNode;
+            head = curNode;
         }
-        public void RemoveFirst()
+        public int GetFirst()
         {
-            Head = Head.next;
+            if (IsEmpty())
+            {
+                Console.WriteLine("IsEmpty ");
+                return 0;
+            }
+            return head.value;        
+        }
+        public int RemoveFirst()
+        {
+            if (IsEmpty())
+            {
+                Console.WriteLine("IsEmpty ");
+                return 0;
+            }
+            Node ptr=head;
+            head = head.next;
             Count--;
+            return ptr.value;
         }
         public void RemoveItem(int value)
         {
 
-            Node previousNode = Head;
-            Node curNode = Head.next;
+            Node previousNode = head;
+            Node curNode = head.next;
             int curCount = Count;
             while (curCount != 0)
             {
@@ -121,7 +132,7 @@ namespace LinkedList
                 }
                 curNode = curNode.next;
             }         
-            if (Head.value == value)
+            if (head.value == value)
             {
                 RemoveFirst();             
             } 
