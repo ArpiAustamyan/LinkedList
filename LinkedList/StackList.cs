@@ -35,5 +35,9 @@ namespace LinkedList
         {
             list.Reverce();
         }
+        public void Show()
+        {
+            list.Show();
+        }
     }
 }

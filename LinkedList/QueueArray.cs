@@ -13,15 +13,25 @@ namespace LinkedList
 
         public int Count { get => count; private set => count = value; }
 
+        private int inE=-1;
+        private int outE = -1;
         public void Enqueue(int value)
         {
-            if (Count == 1000)
+            if (inE == outE && inE != -1)
             {
                 Console.WriteLine("Is full");
                 return;
             }
-            arr[Count] = value;
-            Count++;
+            else if (inE + 1 == 1000)
+            {
+                arr[inE % 1000] = value;
+                inE = 0;
+            }
+            else
+            {
+                arr[inE] = value;
+                inE++;
+            }
         }
         public int Dequeue()
         {
@@ -31,7 +41,14 @@ namespace LinkedList
                 return 0;
             }
             Count--;
-            return arr[Count];
+            int k = outE;
+            if (Count == 0)
+                outE = -1;
+            else if (outE + 1 == 1000)
+                outE = 0;
+            else
+                outE++;
+            return arr[k];
         }
         public bool IsEmpty()
         {
@@ -39,7 +56,7 @@ namespace LinkedList
         }
         public int Peek()
         {
-            return arr[0];
+            return arr[outE];
         }
         public void Reverce()
         {

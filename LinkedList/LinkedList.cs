@@ -144,7 +144,7 @@ namespace LinkedList
         
         public void Show()
         {
-            Node ptr = Head;
+            Node ptr = head;
             int curCount=Count;
             if (IsEmpty())
                 Console.WriteLine("List is empty");
