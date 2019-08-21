@@ -7,6 +7,8 @@ using static LinkedList.LinkedList;
 using static LinkedList.StackArray;
 using static LinkedList.QueueArray;
 using static LinkedList.BigInteger;
+using static LinkedList.Recursion;
+using static LinkedList.Iterative;
 
 namespace LinkedList
 {

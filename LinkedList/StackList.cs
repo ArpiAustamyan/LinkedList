@@ -9,7 +9,7 @@ namespace LinkedList
 {
     public class StackList
     {
-        private LinkedList list;
+        private LinkedList list=new LinkedList();
 
         public void Push(int value)
         {
