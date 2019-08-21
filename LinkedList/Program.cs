@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using static LinkedList.LinkedList;
 using static LinkedList.StackArray;
 using static LinkedList.QueueArray;
+using static LinkedList.BigInteger;
 
 namespace LinkedList
 {

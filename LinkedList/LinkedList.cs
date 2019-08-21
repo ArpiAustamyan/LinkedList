@@ -154,6 +154,7 @@ namespace LinkedList
                 ptr = ptr.next;
                 curCount--;
             }
+            Console.WriteLine();
 
         }
 
