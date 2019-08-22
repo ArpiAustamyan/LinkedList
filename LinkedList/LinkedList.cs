@@ -73,6 +73,8 @@ namespace LinkedList
         }
         public void Reverce()
         {
+            if (Count == 1)
+                return;
             int curCount = Count;
             Node prevNode = head;
             Node curNode = head.next;

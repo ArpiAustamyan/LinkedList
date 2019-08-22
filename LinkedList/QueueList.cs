@@ -9,7 +9,7 @@ namespace LinkedList
 {
     public class QueueList
     {
-        private LinkedList list;
+        private LinkedList list=new LinkedList();
 
         public void Enqueue(int value)
         {
