@@ -8,58 +8,6 @@ namespace LinkedList
 {
     public static class Recursion
     {
-
-        public static void rec(int val, int n)
-        {
-            if (n == val)
-            {
-                return;
-            }
-            // mulS(val, n);
-            emptyTri(val, n);
-            rec(val, n + 1);
-        }
-        public static void mulS(int val, int i)
-        {
-
-            int j, k;
-            for (j = 1; j <= val - i; j++)
-            {
-                Console.Write(" ");
-            }
-            for (k = (val - i); k <= (val); k++)
-            {
-                Console.Write("* ");
-            }
-
-            Console.WriteLine("");
-
-        }
-        public static void emptyTri(int val, int i)
-        {
-            int j, k;
-            for (j = 1; j <= val - i; j++)
-            {
-                Console.Write(" ");
-            }
-            int t = 0;
-            for (k = (val - i); k <= (val + i); k++)
-            {
-                if (i == val - 1)
-                {
-                    Console.Write("* ");
-                    t++;
-                    if (t == val)
-                        break;
-                }
-                else if (k == (val - i) || k == (val + i))
-                    Console.Write("* ");
-                else
-                    Console.Write(" ");
-            }
-            Console.WriteLine();
-        }
-
         public static int BinarySearch(int[] arr, int value)
         {
 
@@ -104,5 +52,16 @@ namespace LinkedList
             return FibonacciArg(second, second + first, --count, value);
         }
 
+        public static StackList Hanoi(StackList first, StackList mid, StackList final, int count)
+        {
+            if (count == 0)
+            {
+                return null;
+            }
+            Hanoi(first, final, mid, count - 1);
+            final.Push(first.Pop());
+            Hanoi(mid, first, final, count - 1);
+            return final;
+        }
     }
 }

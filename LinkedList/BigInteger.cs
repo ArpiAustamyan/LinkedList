@@ -57,8 +57,8 @@ namespace LinkedList
                     arg1.bigInt.AddLast(arg1.bigInt.RemoveFirst());
                 }
             }
-            if(current!=0)
-            newBigInt.bigInt.AddLast(current);
+            if (current != 0)
+                newBigInt.bigInt.AddLast(current);
             return newBigInt;
         }
 
@@ -90,13 +90,13 @@ namespace LinkedList
                 arg2.bigInt.AddLast(arg2.bigInt.RemoveFirst());
             }
 
-            //for (int i = arg2.bigInt.Count; i < arg1.bigInt.Count; i++)
-            //{
-            //    newBigInt.bigInt.AddLast((arg1.bigInt.GetFirst() - current));
-            //    current = 0;
-            //    arg1.bigInt.AddLast(arg1.bigInt.RemoveFirst());
-            //}
-            if(k==newBigInt.bigInt.Count)
+            for (int i = arg2.bigInt.Count; i < arg1.bigInt.Count; i++)
+            {
+                newBigInt.bigInt.AddLast((arg1.bigInt.GetFirst() - current));
+                current = 0;
+                arg1.bigInt.AddLast(arg1.bigInt.RemoveFirst());
+            }
+            if (k == newBigInt.bigInt.Count)
             {
                 for (int i = 0; i < newBigInt.bigInt.Count; i++)
                     newBigInt.bigInt.RemoveFirst();
@@ -105,11 +105,11 @@ namespace LinkedList
 
         }
 
-        static public BigInteger Mul(BigInteger arg1,BigInteger arg2)
+        static public BigInteger Mul(BigInteger arg1, BigInteger arg2)
         {
-            BigInteger currect=new BigInteger(0);
+            BigInteger currect = new BigInteger(0);
             BigInteger newBigInt = new BigInteger();
-            int carry ;
+            int carry;
             for (int j = 0; j < arg2.bigInt.Count; j++)
             {
                 int num = arg2.bigInt.GetFirst();
