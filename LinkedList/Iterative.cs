@@ -11,16 +11,16 @@ namespace LinkedList
     {
         public static int Index(int[] arr)
         {
-            for (int i = 1; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length-1; i++)
             {
-                if (arr[i - 1] < arr[i])
+                if (arr[i] < arr[i+1])
                     continue;
-                return i - 1;
+                return i ;
             }
-            return arr.Length - 1;
+            return - 1;
         }
 
-        public static int MisNum(int[] arr)
+        public static int MissingNum(int[] arr)
         {
             int num = 0;
             for (int i = 0; i < arr.Length; i++)
