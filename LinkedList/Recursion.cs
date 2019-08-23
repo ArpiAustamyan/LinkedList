@@ -11,22 +11,22 @@ namespace LinkedList
         public static int BinarySearch(int[] arr, int value)
         {
 
-            return BinarySearchIndex(arr, value, 0, arr.Length - 1, (arr.Length) / 2);
+            return BinarySearchIndex(arr, value, 0, arr.Length - 1);
         }
-        public static int BinarySearchIndex(int[] arr, int value, int start, int end, int mid)
+        public static int BinarySearchIndex(int[] arr, int value, int start, int end)
         {
             if (start > end)
             {
                 Console.WriteLine("There arent such element");
                 return -1;
             }
-            else if (arr[mid] == value)
+            else if (arr[(end + start) / 2] == value)
             {
-                return mid;
+                return (end + start) / 2;
             }
-            else if (arr[mid] > value)
-                return BinarySearchIndex(arr, value, start, mid - 1, (mid + start - 1) / 2);
-            return BinarySearchIndex(arr, value, mid + 1, end, (mid + end + 1) / 2);
+            else if (arr[(end + start) / 2] > value)
+                return BinarySearchIndex(arr, value, start, (end + start) / 2 - 1);
+            return BinarySearchIndex(arr, value, (end + start) / 2 + 1, end);
         }
 
         public static int BinaryCode(int value)
@@ -40,16 +40,15 @@ namespace LinkedList
 
         public static int Fibonacci(int count)
         {
-            return FibonacciArg(0, 1, count, 0);
+            return FibonacciArg(0, 1, count);
         }
-        public static int FibonacciArg(int first,int second,int count,int value)
+        public static int FibonacciArg(int first, int second, int count)
         {
             if (count == 0)
             {
-                return value;
+                return first;
             }
-            value = second;
-            return FibonacciArg(second, second + first, --count, value);
+            return FibonacciArg(second, second + first, --count);
         }
 
         public static StackList Hanoi(StackList first, StackList mid, StackList final, int count)

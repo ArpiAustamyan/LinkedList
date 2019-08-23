@@ -9,6 +9,27 @@ namespace LinkedList
 {
     public static class Iterative
     {
+        public static int Index(int[] arr)
+        {
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i - 1] < arr[i])
+                    continue;
+                return i - 1;
+            }
+            return arr.Length - 1;
+        }
+
+        public static int MisNum(int[] arr)
+        {
+            int num = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                num += arr[i];
+            }
+            return (arr.Length + 1) * (arr.Length + 2) / 2 - num;
+        }
+
         public static int Fibonacci(int num)
         {
             if (num == 0)
@@ -42,7 +63,7 @@ namespace LinkedList
                 int mid = (start + end + 1) / 2;
                 if (value == arr[mid])
                 {
-                    return ++mid;
+                    return mid;
                 }
                 else if (value < arr[mid])
                 {
@@ -57,7 +78,6 @@ namespace LinkedList
             Console.WriteLine("There arent such element");
             return -1;
         }
-
         public static void Triangle(int val)
         {
             int i, j, k;
@@ -74,7 +94,6 @@ namespace LinkedList
                 Console.WriteLine("");
             }
         }
-
         public static void emptyTriangle(int val)
         {
             int i, j, k;
