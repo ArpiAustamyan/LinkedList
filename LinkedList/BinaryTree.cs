@@ -12,9 +12,10 @@ namespace LinkedList
         {
             public NodeTree parent;
             public int value;
+            public int bal;
             public NodeTree left;
             public NodeTree right;
-            public NodeTree(int newValue = 0, NodeTree par = null, NodeTree l = null, NodeTree r = null)
+            public NodeTree(int newValue = 0, int newIndex = 0, NodeTree par = null, NodeTree l = null, NodeTree r = null)
             {
                 value = newValue;
                 parent = par;
@@ -40,6 +41,7 @@ namespace LinkedList
                 LPR(ptr.left);
             }
             Console.Write(ptr.value + " ");
+            Console.WriteLine(ptr.bal);
             if (ptr.right != null)
             {
                 LPR(ptr.right);

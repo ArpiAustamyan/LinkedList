@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static LinkedList.LinkedList;
-using static LinkedList.StackArray;
-using static LinkedList.QueueArray;
-using static LinkedList.BigInteger;
-using static LinkedList.Recursion;
-using static LinkedList.Iterative;
 
 namespace LinkedList
 {

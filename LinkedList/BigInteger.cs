@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static LinkedList.LinkedList;
+using static LinkedList.LinkedList<int>;
 
 namespace LinkedList
 {
     public class BigInteger
     {
-        private LinkedList bigInt = new LinkedList();
+        private LinkedList<int> bigInt = new LinkedList<int>();
 
         private BigInteger() { }
         public BigInteger(int value)
         {
+            if (value == 0)
+                bigInt.AddLast(0);
             while (value != 0)
             {
                 bigInt.AddLast((value % 10));
@@ -47,13 +49,13 @@ namespace LinkedList
                 if (arg1.bigInt.Count == count1)
                 {
                     newBigInt.bigInt.AddLast(arg2.bigInt.GetFirst() + current);
-                    current = 0;
+                    current = (arg1.bigInt.GetFirst() + arg2.bigInt.GetFirst()) / 10;
                     arg2.bigInt.AddLast(arg2.bigInt.RemoveFirst());
                 }
                 else
                 {
                     newBigInt.bigInt.AddLast(arg1.bigInt.GetFirst() + current);
-                    current = 0;
+                    current = (arg1.bigInt.GetFirst() + arg2.bigInt.GetFirst()) / 10;
                     arg1.bigInt.AddLast(arg1.bigInt.RemoveFirst());
                 }
             }
@@ -67,11 +69,6 @@ namespace LinkedList
             BigInteger newBigInt = new BigInteger();
             int current = 0;
             int k = 0;
-            if (arg1.bigInt.Count < arg2.bigInt.Count)
-            {
-                Console.WriteLine("Subtract cant be done:");
-                return newBigInt;
-            }
             for (int i = 0; i < arg2.bigInt.Count; i++)
             {
                 if (arg1.bigInt.GetFirst() >= arg2.bigInt.GetFirst())
@@ -92,15 +89,31 @@ namespace LinkedList
 
             for (int i = arg2.bigInt.Count; i < arg1.bigInt.Count; i++)
             {
-                newBigInt.bigInt.AddLast((arg1.bigInt.GetFirst() - current));
-                current = 0;
+                if (arg1.bigInt.GetFirst() >= arg2.bigInt.GetFirst())
+                {
+                    newBigInt.bigInt.AddLast((arg1.bigInt.GetFirst() - current));
+                    current = 0;
+                }
+                else
+                {
+                    newBigInt.bigInt.AddLast((arg1.bigInt.GetFirst() + 10 - current));
+                    current = 1;
+                }
                 arg1.bigInt.AddLast(arg1.bigInt.RemoveFirst());
             }
             if (k == newBigInt.bigInt.Count)
             {
-                for (int i = 0; i < newBigInt.bigInt.Count; i++)
+                for (int i = 1; i < newBigInt.bigInt.Count; i++)
                     newBigInt.bigInt.RemoveFirst();
             }
+            if (newBigInt.bigInt.Count != 1)
+            {
+                newBigInt.bigInt.Reverce();
+                while (newBigInt.bigInt.GetFirst() == 0)
+                    newBigInt.bigInt.RemoveFirst();
+                newBigInt.bigInt.Reverce();
+            }
+
             return newBigInt;
 
         }
@@ -120,18 +133,18 @@ namespace LinkedList
                     carry = (((arg1.bigInt.GetFirst() * num) + carry) / 10);
                     arg1.bigInt.AddLast(arg1.bigInt.RemoveFirst());
                 }
-                if(carry != 0)
-                newBigInt.bigInt.AddLast(carry);
+                if (carry != 0)
+                    newBigInt.bigInt.AddLast(carry);
                 currect = BigInteger.Add(currect, newBigInt);
                 newBigInt = BigInteger.Subtract(newBigInt, newBigInt);
-                newBigInt.bigInt.RemoveFirst();
+                //newBigInt.bigInt.RemoveFirst();
                 arg2.bigInt.AddLast(arg2.bigInt.RemoveFirst());
 
             }
 
-           return currect;
+            return currect;
         }
-        
+
         public void Show()
         {
             if (bigInt == null)
