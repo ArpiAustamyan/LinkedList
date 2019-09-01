@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static LinkedList.LinkedList;
 
 namespace LinkedList
 {
-    public class StackList
+    public class StackList<T> where T : IComparable
     {
-        private LinkedList list=new LinkedList();
+        private LinkedList<T> list;
 
-        public void Push(int value)
+        public void Push(T value)
         {
             list.AddFirst(value);
         }
-        public int Pop()
+        public T Pop()
         {
             return list.RemoveFirst();
         }
@@ -23,7 +22,7 @@ namespace LinkedList
         {
             return list.IsEmpty();
         }
-        public int Peek()
+        public T Peek()
         {
             return list.GetFirst();
         }
@@ -38,6 +37,11 @@ namespace LinkedList
         public void Show()
         {
             list.Show();
+        }
+
+        public int CompareTo(T other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

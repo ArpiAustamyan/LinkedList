@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static LinkedList.LinkedList;
+//using static LinkedList.LinkedList<T>;
 
 namespace LinkedList
 {
-    public class QueueList
+    public class QueueList<T> where T: IComparable 
     {
-        private LinkedList list=new LinkedList();
+        private LinkedList<T> list;
 
-        public void Enqueue(int value)
+        public void Enqueue(T value)
         {
             list.AddLast(value);
         }
-        public int Dequeue()
+        public T Dequeue()
         {
             return list.RemoveFirst();
         }
@@ -23,7 +23,7 @@ namespace LinkedList
         {
             return list.IsEmpty();
         }
-        public int Peek()
+        public T Peek()
         {
             return list.GetFirst();
         }
@@ -38,6 +38,11 @@ namespace LinkedList
         public void Show()
         {
             list.Show();
+        }
+
+        public int CompareTo(T other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

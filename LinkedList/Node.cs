@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class Node
+
+    public class Node<T> where T: System.IComparable
     {
-        public int value;
-        public Node next;
-        public Node(int newValue=0, Node newNode=null)
+        private T value;
+        public Node<T> next;
+
+        public T Value { get => value; set => this.value = value; }
+
+        public Node(T newValue, Node<T> newNode = null)
         {
-            value = newValue;
+            Value = newValue;
             next = newNode;
         }
+
     }
 }

@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static LinkedList.Node; 
+using System.Collections;
 
-namespace LinkedList
+namespace LinkedList 
 {
-    public class LinkedList
+    public class LinkedList<T> where T: IComparable
     {
-        private Node head;
-        private Node tail;
+        private Node<T> head;
+        private Node<T> tail;
         private int count=0;
 
         public int Count { get => count; private set => count = value; }
 
         public LinkedList() { }
 
-        public void AddFirst(int value)
+        public void AddFirst(T value)
         {         
-            Node newNode = new Node(value);
+            Node<T> newNode = new Node<T>(value);
             if (Count == 0)
             {
                 tail = newNode;
@@ -31,9 +31,9 @@ namespace LinkedList
             head = newNode;
             Count++;
         }
-        public void AddLast(int value)
+        public void AddLast(T value)
         {
-            Node newNode = new Node(value);
+            Node<T> newNode = new Node<T>(value);
             if (Count == 0)
             {
                 head = newNode;
@@ -47,10 +47,10 @@ namespace LinkedList
             
             Count++;
         }
-        public void Insert(int value,int index)
+        public void Insert(T value,int index)
         {
-            Node previousNode = head;
-            Node curNode = head.next;
+            Node<T> previousNode = head;
+            Node<T> curNode = head.next;
 
             if (index == 1)
             {
@@ -59,7 +59,7 @@ namespace LinkedList
             }
             if ((index-1)<= Count)
             {
-                Node newNode = new Node(value);
+                Node<T> newNode = new Node<T>(value);
                 while(index!=2)
                 {
                     previousNode = previousNode.next;
@@ -76,9 +76,9 @@ namespace LinkedList
             if (Count == 1)
                 return;
             int curCount = Count;
-            Node prevNode = head;
-            Node curNode = head.next;
-            Node nextNode = curNode.next;
+            Node<T> prevNode = head;
+            Node<T> curNode = head.next;
+            Node<T> nextNode = curNode.next;
             prevNode.next = null;
             tail = prevNode;
             while (curCount != 2)
@@ -92,36 +92,36 @@ namespace LinkedList
             curNode.next = prevNode;
             head = curNode;
         }
-        public int GetFirst()
+        public T GetFirst()
         {
             if (IsEmpty())
             {
                 Console.WriteLine("IsEmpty ");
-                return 0;
+                return default;
             }
-            return head.value;        
+            return head.Value;        
         }
-        public int RemoveFirst()
+        public T RemoveFirst()
         {
             if (IsEmpty())
             {
                 Console.WriteLine("IsEmpty ");
-                return 0;
+                return default;
             }
-            Node ptr=head;
+            Node<T> ptr=head;
             head = head.next;
             Count--;
-            return ptr.value;
+            return ptr.Value;
         }
-        public void RemoveItem(int value)
+        public void RemoveItem(T value)
         {
 
-            Node previousNode = head;
-            Node curNode = head.next;
+            Node<T> previousNode = head;
+            Node<T> curNode = head.next;
             int curCount = Count;
             while (curCount != 0)
             {
-                if (curNode.value == value)
+                if (curNode.Value.CompareTo( value)==0)
                 {
                     previousNode.next = curNode.next;
                     Count--;
@@ -134,7 +134,7 @@ namespace LinkedList
                 }
                 curNode = curNode.next;
             }         
-            if (head.value == value)
+            if (head.Value.CompareTo(value) == 0)
             {
                 RemoveFirst();             
             } 
@@ -146,13 +146,13 @@ namespace LinkedList
         
         public void Show()
         {
-            Node ptr = head;
+            Node<T> ptr = head;
             int curCount=Count;
             if (IsEmpty())
                 Console.WriteLine("List is empty");
             while (curCount!=0)
             {
-                Console.Write(ptr.value + "\t");
+                Console.Write(ptr.Value + "\t");
                 ptr = ptr.next;
                 curCount--;
             }
