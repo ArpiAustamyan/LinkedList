@@ -48,13 +48,13 @@ namespace LinkedList
             {
                 if (arg1.bigInt.Count == count1)
                 {
-                    newBigInt.bigInt.AddLast(arg2.bigInt.GetFirst() + current);
+                    newBigInt.bigInt.AddLast((arg2.bigInt.GetFirst() + current)%10);
                     current = (arg1.bigInt.GetFirst() + arg2.bigInt.GetFirst()) / 10;
                     arg2.bigInt.AddLast(arg2.bigInt.RemoveFirst());
                 }
                 else
                 {
-                    newBigInt.bigInt.AddLast(arg1.bigInt.GetFirst() + current);
+                    newBigInt.bigInt.AddLast((arg1.bigInt.GetFirst() + current)%10);
                     current = (arg1.bigInt.GetFirst() + arg2.bigInt.GetFirst()) / 10;
                     arg1.bigInt.AddLast(arg1.bigInt.RemoveFirst());
                 }
@@ -89,7 +89,7 @@ namespace LinkedList
 
             for (int i = arg2.bigInt.Count; i < arg1.bigInt.Count; i++)
             {
-                if (arg1.bigInt.GetFirst() >= arg2.bigInt.GetFirst())
+                if (arg1.bigInt.GetFirst() >= current)
                 {
                     newBigInt.bigInt.AddLast((arg1.bigInt.GetFirst() - current));
                     current = 0;
