@@ -51,7 +51,7 @@ namespace LinkedList
             return FibonacciArg(second, second + first, --count);
         }
 
-        public static StackList Hanoi(StackList first, StackList mid, StackList final, int count)
+        public static StackList<string> Hanoi(StackList<string> first, StackList<string> mid, StackList<string> final, int count)
         {
             if (count == 0)
             {

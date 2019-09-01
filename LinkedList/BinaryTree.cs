@@ -74,26 +74,65 @@ namespace LinkedList
             }
         }
 
-        public void Add(int val)
+        public bool Contains(int value)
+        {
+            NodeTree ptr = rute;
+            while (ptr.value != value && ptr != null)
+            {
+                if (ptr.value > value)
+                    ptr = ptr.right;
+                if (ptr.value < value)
+                    ptr = ptr.left;
+            }
+            if (ptr == null)
+                return false;
+            return true;
+        }
+
+        private void ChangeBalance(NodeTree ptr)
+        {
+
+            while (ptr != null)
+            {
+                if (ptr.left == null || ptr.right == null)
+                {
+                    if (ptr.left == null)
+                        ptr.bal = ptr.right.bal + 1;
+                    else
+                    {
+                        ptr.bal = ptr.left.bal + 1;
+                    }
+                }
+                else
+                {
+                    if (ptr.left.bal > ptr.right.bal)
+                        ptr.bal = ptr.left.bal + 1;
+                    else
+                        ptr.bal = ptr.right.bal + 1;
+                }
+                ptr = ptr.parent;
+            }
+        }
+
+        public void Add(NodeTree newItem)
         {
             if (Count == 0)
             {
-                rute = new NodeTree(val);
+                rute = newItem;
                 Count++;
                 return;
             }
-
             Count++;
-            NodeTree newItem = new NodeTree(val);
             NodeTree ptr = rute;
             while (true)
             {
-                if (ptr.value > val)
+                if (ptr.value > newItem.value)
                 {
                     if (ptr.left == null)
                     {
                         ptr.left = newItem;
-                        newItem.parent = rute;
+                        newItem.parent = ptr;
+                        ChangeBalance(ptr);
                         break;
                     }
                     ptr = ptr.left;
@@ -104,12 +143,20 @@ namespace LinkedList
                     {
                         ptr.right = newItem;
                         newItem.parent = ptr;
+                        ChangeBalance(ptr);
                         break;
                     }
+                    ptr.bal++;
                     ptr = ptr.right;
                 }
-
             }
         }
+
+        public int Remove(int value)
+        {
+
+            return 0;
+        }
+
     }
 }
