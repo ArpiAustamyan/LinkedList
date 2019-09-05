@@ -23,75 +23,100 @@ namespace LinkedList
                 right = r;
             }
         }
-        private NodeTree rute;
+        protected NodeTree root;
         private int count = 0;
 
         public int Count { get => count; private set => count = value; }
 
-        public void Print()
+        public void Inorder(NodeTree ptr)
         {
-            LPR(rute);
-            Console.WriteLine();
-        }
-
-        public void LPR(NodeTree ptr)
-        {
-            if (ptr.left != null)
+            if (ptr != null)
             {
-                LPR(ptr.left);
-            }
-            Console.Write(ptr.value + " ");
-            Console.WriteLine(ptr.bal);
-            if (ptr.right != null)
-            {
-                LPR(ptr.right);
+                Inorder(ptr.left);
+                Console.Write(ptr.value + " ");
+                Console.WriteLine(ptr.bal);
+                Inorder(ptr.right);
             }
         }
 
-        public void LRP(NodeTree ptr)
+        public void Postorder(NodeTree ptr)
         {
-            if (ptr.left != null)
+            if (ptr != null)
             {
-                LPR(ptr.left);
+                Postorder(ptr.left);
+                Postorder(ptr.right);
+                Console.Write(ptr.value + " ");
             }
-            if (ptr.right != null)
-            {
-                LPR(ptr.right);
-            }
-            Console.Write(ptr.value + " ");
         }
 
-        public void PLR(NodeTree ptr)
+        public void Preorder(NodeTree ptr)
         {
-            Console.Write(ptr.value + " ");
-            if (ptr.left != null)
+            if (ptr != null)
             {
-                LPR(ptr.left);
-            }
-            if (ptr.right != null)
-            {
-                LPR(ptr.right);
+                Console.Write(ptr.value + " ");
+                Preorder(ptr.left);
+                Preorder(ptr.right);
             }
         }
 
         public bool Contains(int value)
         {
-            NodeTree ptr = rute;
-            while (ptr.value != value && ptr != null)
+            NodeTree ptr = root;
+            while (ptr != null)
             {
-                if (ptr.value > value)
-                    ptr = ptr.right;
-                if (ptr.value < value)
-                    ptr = ptr.left;
+                if (ptr.value == value)
+                    return true;
+                else
+                {
+                    if (ptr.value > value)
+                        ptr = ptr.right;
+                    else
+                        ptr = ptr.left;
+                }
             }
-            if (ptr == null)
-                return false;
-            return true;
+            return false;
         }
 
-        private void ChangeBalance(NodeTree ptr)
+        protected void AddNode(NodeTree newItem)
         {
+            Add(newItem.value);
+        }
 
+        public void Add(int value)
+        {
+            NodeTree newItem = new NodeTree(value);
+            NodeTree ptr = root;
+            NodeTree parent = null;
+            while (ptr != null)
+            {
+                parent = ptr;
+                if (ptr.value > value)
+                {
+                    ptr = ptr.left;
+                }
+                else
+                {
+                    ptr = ptr.right;
+                }
+            }
+
+            if (parent == null)
+            {
+                root = newItem;
+            }
+            else if (parent.value > newItem.value)
+            {
+                parent.left = newItem;
+            }
+            else
+                parent.right = newItem;
+            newItem.parent = parent;
+            ChangeBalance(newItem);
+        }
+
+        protected void ChangeBalance(NodeTree ptr)
+        {
+            ptr = ptr.parent;
             while (ptr != null)
             {
                 if (ptr.left == null || ptr.right == null)
@@ -114,48 +139,10 @@ namespace LinkedList
             }
         }
 
-        public void Add(NodeTree newItem)
+        public void Print()
         {
-            if (Count == 0)
-            {
-                rute = newItem;
-                Count++;
-                return;
-            }
-            Count++;
-            NodeTree ptr = rute;
-            while (true)
-            {
-                if (ptr.value > newItem.value)
-                {
-                    if (ptr.left == null)
-                    {
-                        ptr.left = newItem;
-                        newItem.parent = ptr;
-                        ChangeBalance(ptr);
-                        break;
-                    }
-                    ptr = ptr.left;
-                }
-                else
-                {
-                    if (ptr.right == null)
-                    {
-                        ptr.right = newItem;
-                        newItem.parent = ptr;
-                        ChangeBalance(ptr);
-                        break;
-                    }
-                    ptr.bal++;
-                    ptr = ptr.right;
-                }
-            }
-        }
-
-        public int Remove(int value)
-        {
-
-            return 0;
+            Inorder(root);
+            Console.WriteLine();
         }
 
     }

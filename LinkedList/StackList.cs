@@ -8,7 +8,7 @@ namespace LinkedList
 {
     public class StackList<T> where T : IComparable
     {
-        private LinkedList<T> list;
+        private LinkedList<T> list = new LinkedList<T>();
 
         public void Push(T value)
         {

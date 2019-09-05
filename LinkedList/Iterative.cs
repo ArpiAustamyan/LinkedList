@@ -93,7 +93,7 @@ namespace LinkedList
                 Console.WriteLine("");
             }
         }
-        public static void emptyTriangle(int val)
+        public static void EmptyTriangle(int val)
         {
             int i, j, k;
             for (i = 0; i < val; i++)

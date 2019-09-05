@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using static LinkedList.LinkedList<T>;
 
 namespace LinkedList
 {
-    public class QueueList<T> where T: IComparable 
+    public class QueueList<T> where T : IComparable
     {
-        private LinkedList<T> list;
+        private LinkedList<T> list = new LinkedList<T>();
 
         public void Enqueue(T value)
         {

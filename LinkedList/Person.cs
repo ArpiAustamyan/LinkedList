@@ -6,18 +6,13 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class LinkedListPerson
+    public class Person
     {
-        public class Person
-        {
-            private string name;
-            private string surname;
-        }
-        //private LinkedList<Person> persons;
-
-        //public void Show()
+        //public class Person
         //{
-        //    persons.Show();
+        //    private string name;
+        //    private string surname;
         //}
+
     }
 }
