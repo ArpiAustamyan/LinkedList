@@ -8,7 +8,7 @@ namespace LinkedList
 {
     public static class Sorting
     {
-        public static int[] BubbleSort(int[] arr)
+        public static void BubbleSort(int[] arr)
         {
             for (int j = 0; j < arr.Length - 1; j++)
             {
@@ -22,10 +22,9 @@ namespace LinkedList
                     }
                 }
             }
-            return arr;
         }
 
-        public static int[] InsertionSort(int[] arr)
+        public static void InsertionSort(int[] arr)
         {
             for (int i = 1; i < arr.Length - 1; i++)
             {
@@ -43,10 +42,9 @@ namespace LinkedList
                         flag = 1;
                 }
             }
-            return arr;
         }
 
-        public static int[] SelectionSort(int[] arr)
+        public static void SelectionSort(int[] arr)
         {
             for (int i = 0; i < arr.Length - 1; i++)
             {
@@ -62,7 +60,6 @@ namespace LinkedList
                 arr[index] = arr[i];
                 arr[i] = temp;
             }
-            return arr;
         }
 
         public static void QuickSort(int[] arr, int left, int right)
@@ -113,7 +110,7 @@ namespace LinkedList
             }
         }
 
-        public static int[] CountingSort(int[] arr)
+        public static void CountingSort(int[] arr)
         {
             int minVal = arr[0];
             int maxVal = arr[0];
@@ -125,7 +122,7 @@ namespace LinkedList
                     maxVal = arr[i];
             }
 
-            int[] counts = new int[maxVal - minVal+1];
+            int[] counts = new int[maxVal - minVal + 1];
 
             for (int i = 0; i < arr.Length; i++)
             {
@@ -140,9 +137,85 @@ namespace LinkedList
                     counts[i]--;
                 }
             }
+        }
 
-            return arr;
-        }  
+        public static void MergeSort(int[] arr, int left, int right)
+        {
+            if (left < right)
+            {
+                int middle = (left + right) / 2;
+
+                MergeSort(arr, left, middle);
+                MergeSort(arr, middle + 1, right);
+
+                Merge(arr, left, middle, right);
+            }
+        }
+
+        private static void Merge(int[] arr, int left, int middle, int right)
+        {
+            int[] leftArray = new int[middle - left + 1];
+            int[] rightArray = new int[right - middle];
+
+            Array.Copy(arr, left, leftArray, 0, middle - left + 1);
+            Array.Copy(arr, middle + 1, rightArray, 0, right - middle);
+
+            int i = 0;
+            int j = 0;
+            for (int k = left; k < right + 1; k++)
+            {
+                if (i == leftArray.Length)
+                {
+                    arr[k] = rightArray[j];
+                    j++;
+                }
+                else if (j == rightArray.Length)
+                {
+                    arr[k] = leftArray[i];
+                    i++;
+                }
+                else if (leftArray[i] <= rightArray[j])
+                {
+                    arr[k] = leftArray[i];
+                    i++;
+                }
+                else
+                {
+                    arr[k] = rightArray[j];
+                    j++;
+                }
+            }
+        }
+
+        public static void HeapSort(int[] arr)
+        {
+            for (int i = arr.Length / 2 - 1; i >= 0; i--)
+                Heapify(arr, arr.Length, i);
+            for (int i = arr.Length - 1; i >= 0; i--)
+            {
+                int temp = arr[0];
+                arr[0] = arr[i];
+                arr[i] = temp;
+                Heapify(arr, i, 0);
+            }
+        }
+        static void Heapify(int[] arr, int n, int i)
+        {
+            int largest = i;
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+            if (left < n && arr[left] > arr[largest])
+                largest = left;
+            if (right < n && arr[right] > arr[largest])
+                largest = right;
+            if (largest != i)
+            {
+                int swap = arr[i];
+                arr[i] = arr[largest];
+                arr[largest] = swap;
+                Heapify(arr, n, largest);
+            }
+        }
 
     }
 }
