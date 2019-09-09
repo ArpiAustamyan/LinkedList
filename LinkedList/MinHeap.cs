@@ -17,20 +17,24 @@ namespace LinkedList
         public MinHeap(int size)
         {
             arr = new int[size];
+            this.size = size;
+        }
+        public MinHeap(int[] array)
+        {
+            size = array.Length;
+            Count = array.Length;
+            arr = array;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                HeapifyUp();
+                Count--;
+            }
+            Count = array.Length;
         }
 
-        private int LeftChildIndex(int itemIndex)
-        {
-            return 2 * itemIndex + 1;
-        }
-        private int RightChildIndex(int itemIndex)
-        {
-            return 2 * itemIndex + 2;
-        }
-        private int ParentIndex(int itemIndex)
-        {
-            return (itemIndex - 1) / 2;
-        }
+        private int LeftChildIndex(int itemIndex) => 2 * itemIndex + 1;
+        private int RightChildIndex(int itemIndex) => 2 * itemIndex + 2;
+        private int ParentIndex(int itemIndex) => (itemIndex - 1) / 2;
 
         private bool HasLeftChild(int itemIndex) => LeftChildIndex(itemIndex) < size;
         private bool HasRightChild(int itemIndex) => RightChildIndex(itemIndex) < size;
@@ -40,7 +44,24 @@ namespace LinkedList
         private int GetRightChild(int itemIndex) => arr[RightChildIndex(itemIndex)];
         private int GetParent(int itemIndex) => arr[ParentIndex(itemIndex)];
 
-        public int GetMin() => arr[0];
+        public bool IsEmpty()
+        {
+            if (Count == 0)
+                Console.WriteLine("Is empty:");
+            return Count == 0;
+        }
+
+        public bool IsFool()
+        {
+            if (Count == size)
+                Console.WriteLine("Is fool:");
+            return Count == size;
+        }
+
+        public int GetMin()
+        {
+            return IsEmpty() ? 0 : arr[0];
+        }
 
         private void HeapifyUp()
         {
@@ -57,9 +78,9 @@ namespace LinkedList
 
         public void Add(int value)
         {
-            if (Count == size)
+            if (IsFool())
             {
-                Console.WriteLine("Is full");
+                return;
             }
             arr[Count] = value;
             Count++;
@@ -91,12 +112,11 @@ namespace LinkedList
 
         public int RemoveMin()
         {
-            if (Count == 0)
-            {
-                Console.WriteLine("Is empty");
+            if (IsEmpty())
                 return 0;
-            }
+            int k = arr[0];
             arr[0] = arr[Count - 1];
+            arr[Count - 1] = arr[0];
             Count--;
             HeapifyDown();
             return arr[Count];
