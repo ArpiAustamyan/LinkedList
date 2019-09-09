@@ -39,7 +39,8 @@ namespace LinkedList
                         j--;
                         arr[j + 1] = val;
                     }
-                    else flag = 1;
+                    else
+                        flag = 1;
                 }
             }
             return arr;
@@ -112,38 +113,36 @@ namespace LinkedList
             }
         }
 
-        public static int[] CountingSort(int[] array)
+        public static int[] CountingSort(int[] arr)
         {
-            int[] sortedArray = new int[array.Length];
-
-            int minVal = array[0];
-            int maxVal = array[0];
-            for (int i = 1; i < array.Length; i++)
+            int minVal = arr[0];
+            int maxVal = arr[0];
+            for (int i = 1; i < arr.Length; i++)
             {
-                if (array[i] < minVal) minVal = array[i];
-                else if (array[i] > maxVal) maxVal = array[i];
+                if (arr[i] < minVal)
+                    minVal = arr[i];
+                else if (arr[i] > maxVal)
+                    maxVal = arr[i];
             }
 
-            int[] counts = new int[maxVal - minVal + 1];
+            int[] counts = new int[maxVal - minVal+1];
 
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                counts[array[i] - minVal]++;
+                counts[arr[i] - minVal]++;
             }
 
-            counts[0]--;
-            for (int i = 1; i < counts.Length; i++)
+            for (int i = 0, j = 0; i < counts.Length; i++)
             {
-                counts[i] = counts[i] + counts[i - 1];
+                while (counts[i] != 0)
+                {
+                    arr[j++] = i + minVal;
+                    counts[i]--;
+                }
             }
 
-            for (int i = array.Length - 1; i >= 0; i--)
-            {
-                sortedArray[counts[array[i] - minVal]--] = array[i];
-            }
-
-            return sortedArray;
-        }
+            return arr;
+        }  
 
     }
 }
