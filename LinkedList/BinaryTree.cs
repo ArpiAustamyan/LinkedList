@@ -15,9 +15,10 @@ namespace LinkedList
             public int bal;
             public NodeTree left;
             public NodeTree right;
-            public NodeTree(int newValue = 0, int newIndex = 0, NodeTree par = null, NodeTree l = null, NodeTree r = null)
+            public NodeTree(int newValue = 0, int newbal = 1, NodeTree par = null, NodeTree l = null, NodeTree r = null)
             {
                 value = newValue;
+                bal = newbal;
                 parent = par;
                 left = l;
                 right = r;
@@ -138,7 +139,6 @@ namespace LinkedList
                 ptr = ptr.parent;
             }
         }
-
         public void Print()
         {
             Inorder(root);
