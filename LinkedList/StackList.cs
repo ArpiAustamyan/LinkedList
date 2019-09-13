@@ -27,7 +27,7 @@ namespace LinkedList
             return list.GetFirst();
         }
         public int Count()
-        {       
+        {
             return list.Count;
         }
         public void Reverce()

@@ -1,6 +1,6 @@
 CREATE TABLE Users
 (
-	UserID int not null IDENTITY(1,1) PRIMARY KEY ,
+	UserId int not null IDENTITY(1,1) PRIMARY KEY ,
 	firstname varchar(50) not null,
 	lastname varchar(100) not null,
 	birthday date  not null,
@@ -45,8 +45,8 @@ WHERE firstname like'%A%' AND lastname like'%Y%';
 
 SELECT * FROM Users;
 
-DELETE from Users 
-WHERE UserId in (select top 1 UserID from Users order by UserID desc )
+DELETE from Users
+WHERE UserId in (select top 1 UserID from Users order by UserID desc)
 
 SELECT * FROM Users;
 

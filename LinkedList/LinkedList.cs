@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace LinkedList 
+namespace LinkedList
 {
-    public class LinkedList<T> where T: IComparable
+    public class LinkedList<T> where T : IComparable
     {
         private Node<T> head;
         private Node<T> tail;
-        private int count=0;
+        private int count = 0;
 
         public int Count { get => count; private set => count = value; }
 
         public LinkedList() { }
 
         public void AddFirst(T value)
-        {         
+        {
             Node<T> newNode = new Node<T>(value);
             if (Count == 0)
             {
@@ -44,10 +44,10 @@ namespace LinkedList
                 tail.next = newNode;
                 tail = tail.next;
             }
-            
+
             Count++;
         }
-        public void Insert(T value,int index)
+        public void Insert(T value, int index)
         {
             Node<T> previousNode = head;
             Node<T> curNode = head.next;
@@ -57,10 +57,10 @@ namespace LinkedList
                 AddFirst(value);
                 return;
             }
-            if ((index-1)<= Count)
+            if ((index - 1) <= Count)
             {
                 Node<T> newNode = new Node<T>(value);
-                while(index!=2)
+                while (index != 2)
                 {
                     previousNode = previousNode.next;
                     curNode = curNode.next;
@@ -99,7 +99,7 @@ namespace LinkedList
                 Console.WriteLine("IsEmpty ");
                 return default;
             }
-            return head.Value;        
+            return head.Value;
         }
         public T RemoveFirst()
         {
@@ -108,24 +108,23 @@ namespace LinkedList
                 Console.WriteLine("IsEmpty ");
                 return default;
             }
-            Node<T> ptr=head;
+            Node<T> ptr = head;
             head = head.next;
             Count--;
             return ptr.Value;
         }
         public void RemoveItem(T value)
         {
-
             Node<T> previousNode = head;
             Node<T> curNode = head.next;
             int curCount = Count;
             while (curCount != 0)
             {
-                if (curNode.Value.CompareTo( value)==0)
+                if (curNode.Value.CompareTo(value) == 0)
                 {
                     previousNode.next = curNode.next;
                     Count--;
-                    curCount-=2;
+                    curCount -= 2;
                 }
                 else
                 {
@@ -133,31 +132,29 @@ namespace LinkedList
                     curCount--;
                 }
                 curNode = curNode.next;
-            }         
+            }
             if (head.Value.CompareTo(value) == 0)
             {
-                RemoveFirst();             
-            } 
+                RemoveFirst();
+            }
         }
         public bool IsEmpty()
         {
             return Count == 0;
         }
-        
         public void Show()
         {
             Node<T> ptr = head;
-            int curCount=Count;
+            int curCount = Count;
             if (IsEmpty())
                 Console.WriteLine("List is empty");
-            while (curCount!=0)
+            while (curCount != 0)
             {
                 Console.Write(ptr.Value + "\t");
                 ptr = ptr.next;
                 curCount--;
             }
             Console.WriteLine();
-
         }
 
     }
