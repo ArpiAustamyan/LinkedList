@@ -48,6 +48,7 @@
     <Compile Include="BigInteger.cs" />
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="BinaryTree.cs" />
+    <Compile Include="HashTable.cs" />
     <Compile Include="MinHeap.cs" />
     <Compile Include="Iterative.cs" />
     <Compile Include="Person.cs" />

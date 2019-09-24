@@ -53,7 +53,7 @@ namespace LinkedList
             {
                 if (GetBalance(node.left) > 0)
                 {
-                    node = RotateLL(node);
+                    node = RotateLL(node); 
                 }
                 else
                 {

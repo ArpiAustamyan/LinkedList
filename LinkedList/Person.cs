@@ -8,11 +8,8 @@ namespace LinkedList
 {
     public class Person
     {
-        //public class Person
-        //{
-        //    private string name;
-        //    private string surname;
-        //}
-
+            private string name;
+            private string surname;
+            private DateTime birthday;
     }
 }
