@@ -12,6 +12,7 @@ namespace LinkedList
         private LinkedList<int> bigInt = new LinkedList<int>();
 
         private BigInteger() { }
+
         public BigInteger(int value)
         {
             if (value == 0)
